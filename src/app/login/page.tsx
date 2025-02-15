@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 export function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-[350px]">
+      <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Masukkan Email dan Password anda</CardDescription>
@@ -41,5 +41,6 @@ export function Login() {
     </div>
   );
 }
+
 
 export default Login;
