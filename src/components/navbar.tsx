@@ -17,6 +17,7 @@ import {
 export function Navbar() {
   return (
     <div className="w-full flex justify-center items-center">
+      
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
