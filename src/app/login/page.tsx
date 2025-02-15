@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,24 +8,38 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-const login = () => {
+
+export function Login() {
   return (
-    <div className="flex justify-center items-center">
-      <Card>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Masukkan Email dan Password anda</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Card Content</p>
+          <form>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" placeholder="Masukkan Email" />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" placeholder="Masukkan Password" />
+              </div>
+              </div>
+          </form>
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
+        <CardFooter className="flex justify-between">
+          <Button>Kirim</Button>
         </CardFooter>
       </Card>
     </div>
   );
-};
+}
 
-export default login;
+export default Login;
