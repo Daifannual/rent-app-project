@@ -1,0 +1,20 @@
+tugas final project
+1. buatkan kelompok backend 1 frontend 4+
+2. implementasi react query /rtk
+3. presentasional component (ts)
+4. implementasi error boundary & portal
+5. implementasi memo (usecallback)
+6. buat unit testing (per-page) (login, register, test)
+7. implementasi (tauri, pwa optional)
+8. buat project implementasi all endpoint backend
+  - login
+  - register
+  - forgot password
+  - get alat (show ke user)
+  - edit / delete alat (admin)
+  - sewa alat (admin)
+  - get pelanggan (admin)
+  - edit/delete pelanggal (admin)
+9. tailwind (3/4)
+10. ui kit (bebas)
+11. deploy vercell
