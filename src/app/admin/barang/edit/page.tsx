@@ -12,15 +12,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-export function Tambah() {
+export function Edit() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       {/* Full-screen container */}
       <div className="w-full max-w-4xl mx-auto p-6">
         <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
           <CardHeader>
-            <CardTitle>Tambah Alat</CardTitle>
-            <CardDescription>Tambahkan alat yang akan di sewa</CardDescription>
+            <CardTitle>Edit Alat</CardTitle>
+            <CardDescription>Edit alat yang akan di sewa</CardDescription>
           </CardHeader>
           <CardContent>
             <form>
@@ -28,7 +28,7 @@ export function Tambah() {
                 {/* Nama Alat */}
                 <div className="flex flex-col space-y-2">
                   <Label htmlFor="nama-alat">Nama Alat</Label>
-                  <Input id="nama-alat" placeholder="Laptop" />
+                  <Input id="nama-alat" placeholder="Alat yang disewa" />
                 </div>
 
                 {/* Deskripsi Alat */}
@@ -69,4 +69,4 @@ export function Tambah() {
   );
 }
 
-export default Tambah;
+export default Edit;
