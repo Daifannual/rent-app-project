@@ -1,11 +1,9 @@
 "use client"; // Tambahkan ini jika menggunakan Next.js App Router
-
 import React, { useState } from 'react';
 
 const Barang = () => {
   // State untuk menyimpan nilai input search
   const [searchTerm, setSearchTerm] = useState('');
-
   // State untuk menyimpan kategori yang dipilih
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -76,25 +74,25 @@ const Barang = () => {
                 : "bg-white text-zinc-500 dark:text-zinc-400 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700"
             } m-1 rounded-xl focus:bg-zinc-600`}
           >
-            woi 
+            {categoryNames[category]}
           </button>
         ))}
       </div>
 
       {/* Grid of Cards */}
-      <div className="px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-4 gap-6 justify-center">
-          {/* Looping through filtered cards */}
-          {filteredCards.map((card) => (
-            <div key={card.id} className="card bg-slate-300 shadow-xl w-full mx-auto">
-              <div className="card-body">
-                <h2 className="card-title">{card.title}</h2>
-                <p>{card.description}</p>
-                <div className="card-actions justify-end"></div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 mx-10 md:mx-32">
+        {filteredCards.map((card) => (
+          <div
+            key={card.id}
+            className="border border-gray-300 rounded-lg p-4 shadow-md bg-white dark:bg-zinc-800"
+          >
+            <h3 className="text-lg font-bold">{card.title}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{card.description}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Kategori: {categoryNames[card.category]}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
