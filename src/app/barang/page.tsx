@@ -39,7 +39,7 @@ const Barang = () => {
   return (
     <div>
       {/* Search Input */}
-      <div className="mt-8 px-4">
+      <div className="mt-8 px-4 flex justify-end">
         <input
           type="text"
           placeholder="Search cards..."
