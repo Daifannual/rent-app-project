@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 export function register() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-[400px]">
+      <Card className="w-[400px] mx-2">
         <CardHeader>
           <CardTitle>Register</CardTitle>
           <CardDescription>Masukkan Username, Email, dan Password anda</CardDescription>
@@ -34,14 +34,14 @@ export function register() {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" placeholder="Masukkan Password" />
+                <Input id="password" type="password" placeholder="Masukkan Password" />
               </div>
               </div>
               </div>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button>Kirim</Button>
+          <Button className='w-full md:w-fit'>Kirim</Button>
         </CardFooter>
       </Card>
     </div>

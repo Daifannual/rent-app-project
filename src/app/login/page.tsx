@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import Link from "next/link";
 
 export function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-[400px]">
+      <Card className="w-[400px] mx-2">
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Masukkan Email dan Password anda</CardDescription>
@@ -31,16 +31,16 @@ export function Login() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" placeholder="Masukkan Password" />
               </div>
-              </div>
+            </div>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button>Kirim</Button>
+          <Link href="/#" className="text-sm hover:underline">Lupa Password?</Link>
         </CardFooter>
       </Card>
     </div>
   );
 }
-
 
 export default Login;
