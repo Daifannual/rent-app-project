@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,10 +15,34 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export function Edit() {
+  // State untuk menyimpan nilai input
+  const [formData, setFormData] = useState({
+    namaAlat: "",
+    deskripsiAlat: "",
+    hargaPerHari: "",
+    stokAlat: "",
+  });
+
+  // Handler untuk mengupdate state saat input berubah
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  // Handler untuk menyimpan data
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.log("Data yang disimpan:", formData);
+    alert("Data berhasil disimpan!");
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
       {/* Full-screen container */}
-      <div className="w-full p-6">
+      <div className="w-full max-w-lg p-6">
         <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
           <CardHeader>
             <CardTitle>Edit Alat</CardTitle>
@@ -27,41 +53,54 @@ export function Edit() {
               <div className="grid w-full items-center gap-6">
                 {/* Nama Alat */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="nama-alat">Nama Alat</Label>
-                  <Input id="nama-alat" placeholder="Alat yang disewa" />
-                </div>
-
-                {/* Deskripsi Alat */}
-                <div className="flex flex-col space-y-2">
-                  <Label htmlFor="deskripsi-alat">Deskripsi Alat</Label>
-                  <Input id="deskripsi-alat" placeholder="Alat ini digunakan untuk..." />
-                </div>
-
-                {/* Harga Per Hari */}
-                <div className="flex flex-col space-y-2">
-                  <Label htmlFor="harga-per-hari">Harga Per Hari (Rp)</Label>
+                  <Label htmlFor="namaAlat">Nama Alat</Label>
                   <Input
-                    id="harga-per-hari"
-                    type="number"
-                    placeholder="Masukkan harga per hari"
+                    id="namaAlat"
+                    placeholder="Alat yang disewa"
+                    value={formData.namaAlat}
+                    onChange={handleChange}
                   />
                 </div>
-
+                {/* Deskripsi Alat */}
+                <div className="flex flex-col space-y-2">
+                  <Label htmlFor="deskripsiAlat">Deskripsi Alat</Label>
+                  <Input
+                    id="deskripsiAlat"
+                    placeholder="Alat ini digunakan untuk..."
+                    value={formData.deskripsiAlat}
+                    onChange={handleChange}
+                  />
+                </div>
+                {/* Harga Per Hari */}
+                <div className="flex flex-col space-y-2">
+                  <Label htmlFor="hargaPerHari">Harga Per Hari (Rp)</Label>
+                  <Input
+                    id="hargaPerHari"
+                    type="number"
+                    placeholder="Masukkan harga per hari"
+                    value={formData.hargaPerHari}
+                    onChange={handleChange}
+                  />
+                </div>
                 {/* Stok Alat */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="stok-alat">Stok Alat</Label>
+                  <Label htmlFor="stokAlat">Stok Alat</Label>
                   <Input
-                    id="stok-alat"
+                    id="stokAlat"
                     type="number"
                     placeholder="Masukkan jumlah stok"
+                    value={formData.stokAlat}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
             </form>
           </CardContent>
           <CardFooter className="flex justify-end space-x-4 mt-6">
-            <Button variant="outline">Simpan</Button>
-            <Button>Kembali</Button>
+            <Button variant="outline" onClick={() => alert("Kembali ke halaman sebelumnya")}>
+              Kembali
+            </Button>
+            <Button onClick={handleSave}>Simpan</Button>
           </CardFooter>
         </Card>
       </div>
