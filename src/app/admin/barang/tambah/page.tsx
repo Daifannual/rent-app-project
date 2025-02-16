@@ -14,9 +14,9 @@ import Link from "next/link";
 
 export function Tambah() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-white">
       {/* Full-screen container */}
-      <div className="w-full max-w-4xl mx-auto p-6">
+      <div className="w-full p-6">
         <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
           <CardHeader>
             <CardTitle>Tambah Alat</CardTitle>
