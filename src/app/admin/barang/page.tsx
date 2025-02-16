@@ -12,7 +12,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Trash2, Pencil, Plus } from "lucide-react";
+import {
+  ArrowUpDown,
+  MoreHorizontal,
+  Trash2,
+  Pencil,
+  Plus,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -31,6 +37,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
 
 // Sample data
 const initialData: Tool[] = [
@@ -173,12 +180,13 @@ export function DataTableDemo() {
       </div>
       {/* Add Tool Button */}
       <div className="flex items-center justify-between py-4">
-        <Button
-          onClick={handleAddTool}
-          className="bg-primary text-white hover:bg-primary-dark transition-colors"
-        >
-          <Plus className="mr-2 h-4 w-4" /> Tambah Alat
-        </Button>
+        <Link href={"/admin/barang/tambah"}>
+          <Button
+            onClick={handleAddTool}
+            className="bg-primary text-white hover:bg-primary-dark transition-colors">
+            <Plus className="mr-2 h-4 w-4" /> Tambah Alat
+          </Button>
+        </Link>
         <div className="space-x-2">
           <Button
             variant="outline"
@@ -279,9 +287,15 @@ export const columns: ColumnDef<Tool>[] = [
       };
 
       const handleDelete = () => {
-        if (window.confirm(`Apakah Anda yakin ingin menghapus alat "${tool.name}"?`)) {
+        if (
+          window.confirm(
+            `Apakah Anda yakin ingin menghapus alat "${tool.name}"?`
+          )
+        ) {
           // Call the parent component's delete function
-          window.dispatchEvent(new CustomEvent("delete-tool", { detail: tool.id }));
+          window.dispatchEvent(
+            new CustomEvent("delete-tool", { detail: tool.id })
+          );
         }
       };
 
@@ -298,12 +312,14 @@ export const columns: ColumnDef<Tool>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+            <Link href={"/admin/barang/edit"}>
             <DropdownMenuItem
               onClick={handleEdit}
               className="text-blue-600 hover:bg-blue-100"
             >
               <Pencil className="mr-2 h-4 w-4" /> Edit
             </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem
               onClick={handleDelete}
               className="text-red-600 hover:bg-red-100"
