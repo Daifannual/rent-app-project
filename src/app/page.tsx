@@ -50,11 +50,12 @@ export default function Home() {
             <div key={i}>
               <Card>
                 <CardHeader>
-                  <CardTitle>Ipong XR</CardTitle>
+                  <CardTitle>Iphone 13</CardTitle>
                   <CardDescription>Handphone</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm">Card Content</p>
+                <CardContent className="flex justify-between">
+                  <p className="text-sm text-zinc-500">8/128, Black</p>
+                  <p className=" font-semibold text-zinc-500">Rp. 35.000</p>
                 </CardContent>
               </Card>
             </div>

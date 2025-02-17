@@ -14,14 +14,14 @@ import Link from "next/link";
 
 export function Tambah() {
   return (
-     <div className="flex justify-center items-center min-h-screen bg-white">
+     <div className="flex justify-center items-center min-h-screen">
          {/* Full-screen container */}
          <div className="w-full p-6">
-           <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
+           <Card className="w-full p-6 shadow-lg rounded-lg">
           <CardHeader>
             <CardTitle>Edit Penyewaan</CardTitle>
             <CardDescription>
-              Edit data penyewaan alat berikut.
+              Edit data penyewaan barang berikut.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -29,7 +29,7 @@ export function Tambah() {
               <div className="grid w-full items-center gap-6">
                 {/* Nama Alat */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="nama-alat">Nama Alat</Label>
+                  <Label htmlFor="nama-alat">Nama Barang</Label>
                   <Input id="nama-alat" placeholder="Nama alat" />
                 </div>
 

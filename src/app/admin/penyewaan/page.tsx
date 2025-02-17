@@ -101,15 +101,6 @@ export const columns: ColumnDef<RentalItem>[] = [
     cell: ({ row }) => <div>{row.getValue("returnDate")}</div>,
   },
   {
-    accessorKey: "paymentStatus",
-    header: () => <div>Status Pembayaran</div>,
-    cell: ({ row }) => {
-      const status = row.getValue("paymentStatus");
-      const color = status === "Lunas" ? "text-green-600" : "text-red-600";
-      return <div className={color}>{status}</div>;
-    },
-  },
-  {
     accessorKey: "returnStatus",
     header: () => <div>Status Pengembalian</div>,
     cell: ({ row }) => {
@@ -210,8 +201,8 @@ export default function Penyewaan() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Daftar Penyewaan</h1>
         <Link href={"/admin/penyewaan/tambah"}>
-        <Button variant="default" className="bg-blue-600 hover:bg-blue-700">
-          <Plus className="mr-2 h-4 w-4" /> Tambah Alat
+        <Button variant="default">
+          <Plus className="mr-2 h-4 w-4" /> Penyewaan
         </Button>
         </Link>
       </div>
@@ -224,12 +215,12 @@ export default function Penyewaan() {
           onChange={(event) =>
             table.getColumn("item")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm border border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+          className="max-w-sm border border-gray-300 rounded-md focus:border-primary focus:ring-primary"
         />
       </div>
 
       {/* Table */}
-      <div className="rounded-lg border border-gray-200 overflow-hidden shadow-md bg-white dark:bg-gray-900">
+      <div className="rounded-lg border-2 border-gray-200 overflow-hidden bg-white dark:bg-gray-900">
         <Table>
           <TableHeader className="bg-gray-100 dark:bg-gray-800">
             {table.getHeaderGroups().map((headerGroup) => (

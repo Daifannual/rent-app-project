@@ -14,10 +14,10 @@ import Link from "next/link";
 
 export function Tambah() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center min-h-screen">
       {/* Full-screen container */}
-      <div className="w-full p-6">
-        <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
+      <div className="w-full p-3">
+        <Card className="w-full p-6 bg-white rounded-lg">
           <CardHeader>
             <CardTitle>Tambah Alat</CardTitle>
             <CardDescription>Tambahkan alat yang akan di sewa</CardDescription>

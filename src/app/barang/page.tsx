@@ -1,21 +1,79 @@
 "use client"; // Tambahkan ini jika menggunakan Next.js App Router
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { MonitorSmartphone, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Barang = () => {
-  // State untuk menyimpan nilai input search
-  const [searchTerm, setSearchTerm] = useState('');
-  // State untuk menyimpan kategori yang dipilih
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Data dummy untuk kartu dengan tambahan properti category
+  // Data dummy untuk kartu dengan tambahan properti category, price, dan stock
   const cardsData = [
-    { id: 1, title: "Card 1", description: "Deskripsi Card 1", category: "kategori1" },
-    { id: 2, title: "Card 2", description: "Deskripsi Card 2", category: "kategori2" },
-    { id: 3, title: "Card 3", description: "Deskripsi Card 3", category: "kategori1" },
-    { id: 4, title: "Card 4", description: "Deskripsi Card 4", category: "kategori3" },
-    { id: 5, title: "Card 5", description: "Deskripsi Card 5", category: "kategori2" },
-    { id: 6, title: "Card 6", description: "Deskripsi Card 6", category: "kategori3" },
-    { id: 7, title: "Card 7", description: "Deskripsi Card 7", category: "kategori1" },
+    {
+      id: 1,
+      title: "iPhone 13",
+      description: "128GB, Grey",
+      category: "kategori1",
+      price: 35000,
+      stock: 10,
+    },
+    {
+      id: 2,
+      title: "MacBook Air",
+      description: "8GB RAM, 256GB SSD",
+      category: "kategori2",
+      price: 250000,
+      stock: 5,
+    },
+    {
+      id: 3,
+      title: "Canon EOS 5D",
+      description: "24.2MP, Full Frame",
+      category: "kategori3",
+      price: 250000,
+      stock: 3,
+    },
+    {
+      id: 4,
+      title: "iPhone 13 Pro",
+      description: "1TB, Gold",
+      category: "kategori1",
+      price: 100000,
+      stock: 2,
+    },
+    {
+      id: 5,
+      title: "Dell XPS 13",
+      description: "16GB RAM, 512GB SSD",
+      category: "kategori2",
+      price: 200000,
+      stock: 8,
+    },
+    {
+      id: 6,
+      title: "Nikon D850",
+      description: "45.7MP, Full Frame",
+      category: "kategori3",
+      price: 300000,
+      stock: 1,
+    },
+    {
+      id: 7,
+      title: "Samsung Galaxy S22",
+      description: "12GB RAM, 1TB",
+      category: "kategori1",
+      price: 150000,
+      stock: 9,
+    },
   ];
 
   // Daftar kategori unik (tanpa "all")
@@ -30,67 +88,78 @@ const Barang = () => {
 
   // Filter data berdasarkan input search dan kategori yang dipilih
   const filteredCards = cardsData.filter((card) => {
-    const matchesSearch = card.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = card.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     const matchesCategory =
       selectedCategory === "all" || card.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  });
+  }); 
 
   return (
-    <div>
-      {/* Search Input */}
-      <div className="mt-8 px-4">
-        <input
-          type="text"
-          placeholder="Search cards..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="input input-bordered w-full max-w-xs mb-4"
-        />
-      </div>
+    <div className="juctify-center pb-12">
+      <div className="mx-10 md:mx-32 mb-8 justify-center items-baseline">
+        <div className="mt-8 px-4 flex justify-center">
+          <input
+            type="text"
+            placeholder="Search cards..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="input input-bordered w-full max-w-xs mb-4"
+          />
+        </div>
 
-      {/* Buttons for Categories */}
-      <div className="flex flex-wrap gap-2 justify-center px-4 mb-4">
-        {/* Tombol "All" */}
-        <button
-          onClick={() => setSelectedCategory("all")}
-          className={`btn btn-sm border-none ${
-            selectedCategory === "all"
-              ? "bg-zinc-600 text-white"
-              : "bg-white text-zinc-500 dark:text-zinc-400 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-          } m-1 rounded-xl focus:bg-zinc-600`}
-        >
-          All
-        </button>
-
-        {/* Tombol untuk setiap kategori */}
-        {categories.map((category, index) => (
-          <button
-            key={index}
-            onClick={() => setSelectedCategory(category)}
-            className={`btn btn-sm border-none ${
-              selectedCategory === category
-                ? "bg-zinc-600 text-white"
+        {/* Buttons for Categories */}
+        <div className="flex flex-wrap gap-2 justify-center px-4 mb-4">
+          {/* Tombol "All" */}
+          <Button
+            onClick={() => setSelectedCategory("all")}
+            className={`btn btn-sm border-2 ${
+              selectedCategory === "all"
+                ? "bg-zinc-400 text-white"
                 : "bg-white text-zinc-500 dark:text-zinc-400 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-            } m-1 rounded-xl focus:bg-zinc-600`}
+            } m-1 rounded-full focus:bg-zinc-200`}
           >
-            {categoryNames[category]}
-          </button>
-        ))}
+            All
+          </Button>
+
+          {/* Tombol untuk setiap kategori */}
+          {categories.map((category, index) => (
+            <Button
+              key={index}
+              onClick={() => setSelectedCategory(category)}
+              className={`btn btn-sm border-2 ${
+                selectedCategory === category
+                  ? "bg-zinc-400 text-white"
+                  : "bg-white text-zinc-500 dark:text-zinc-400 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+              } m-1 rounded-full focus:bg-zinc-400`}
+            >
+              {categoryNames[category]}
+            </Button>
+          ))}
+        </div>
       </div>
 
-      {/* Grid of Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 mx-10 md:mx-32">
         {filteredCards.map((card) => (
-          <div
-            key={card.id}
-            className="border border-gray-300 rounded-lg p-4 shadow-md bg-white dark:bg-zinc-800"
-          >
-            <h3 className="text-lg font-bold">{card.title}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">{card.description}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Kategori: {categoryNames[card.category]}
-            </p>
+          <div key={card.id}>
+            <Card>
+              <CardHeader>
+                <CardTitle>{card.title}</CardTitle>
+                <CardDescription>
+                  {categoryNames[card.category]}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex justify-between">
+                <p className="text-sm text-zinc-500">{card.description}</p>
+                <p className=" font-semibold text-zinc-500">
+                  Rp. {card.price.toLocaleString("id-ID")}
+                </p>
+              </CardContent>
+              <CardFooter className="flex items-center justify-end gap-2">
+                <p className="text-sm text-zinc-500">Stok: {card.stock}</p>
+              </CardFooter>
+            </Card>
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,16 +9,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import Link from 'next/link';
-import { useLoginMutation } from '@/store/api';
-import { useRouter } from 'next/navigation';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { useLoginMutation } from "@/store/api";
+import { useRouter } from "next/navigation";
 
 export function Login() {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
 
@@ -26,10 +26,10 @@ export function Login() {
     e.preventDefault();
     try {
       const result = await login({ name, password }).unwrap();
-      localStorage.setItem('accessToken', result.accessToken); // Simpan token di localStorage
-      router.push('/admin'); // Redirect setelah login berhasil
+      localStorage.setItem("accessToken", result.accessToken); // Simpan token di localStorage
+      router.push("/admin"); // Redirect setelah login berhasil
     } catch (error) {
-      console.error('Login gagal', error);
+      console.error("Login gagal", error);
     }
   };
 
@@ -67,13 +67,21 @@ export function Login() {
             </div>
             <CardFooter className="flex justify-between mt-4">
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? 'Memproses...' : 'Kirim'}
+                {isLoading ? "Memproses..." : "Kirim"}
               </Button>
-              <Link href="/#" className="text-sm hover:underline">
+              <Link href="/reset-password" className="text-sm hover:underline">
                 Lupa Password?
               </Link>
             </CardFooter>
           </form>
+          <CardFooter className="flex justify-center">
+            <span className="text-xs">
+              Belum punya akun?{" "}
+              <Link href="/register" className="hover:underline ">
+                Daftar
+              </Link>
+            </span>
+          </CardFooter>
         </CardContent>
       </Card>
     </div>

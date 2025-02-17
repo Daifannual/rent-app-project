@@ -16,6 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/admin");
 
   const showNavbar = pathname !== "/login" && pathname !== "/register";
 
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className={`bg-background text-foreground antialiased`}>
         <Providers>
-          {showNavbar && <Navbar />}
+          {showNavbar && !isAdmin && <Navbar />}
           {children}
         </Providers>
       </body>
