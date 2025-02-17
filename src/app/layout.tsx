@@ -26,6 +26,7 @@ export default function RootLayout({
         <Providers>
           {showNavbar && !isAdmin && <Navbar />}
           {children}
+          <div id="portal-root"></div>
         </Providers>
       </body>
     </html>

@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useLoginMutation } from "@/store/api";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom"; // Import React Portal
 
 export function Login() {
   const [name, setName] = useState("");
@@ -22,14 +22,25 @@ export function Login() {
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // State untuk notifikasi
+  const [notification, setNotification] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await login({ name, password }).unwrap();
       localStorage.setItem("accessToken", result.accessToken); // Simpan token di localStorage
-      router.push("/admin"); // Redirect setelah login berhasil
+      setNotification("Login berhasil!"); // Set notifikasi sukses
+      setTimeout(() => {
+        setNotification(null); // Hapus notifikasi setelah beberapa detik
+        router.push("/admin"); // Redirect setelah login berhasil
+      }, 2000);
     } catch (error) {
       console.error("Login gagal", error);
+      setNotification("Login gagal. Periksa nama dan password Anda."); // Set notifikasi gagal
+      setTimeout(() => {
+        setNotification(null); // Hapus notifikasi setelah beberapa detik
+      }, 3000);
     }
   };
 
@@ -84,6 +95,19 @@ export function Login() {
           </CardFooter>
         </CardContent>
       </Card>
+
+      {/* Portal untuk Notifikasi */}
+      {notification &&
+        createPortal(
+          <div
+            className={`fixed top-4 right-4 p-4 rounded-md shadow-lg ${
+              notification.includes("berhasil") ? "bg-green-500 text-white" : "bg-red-500 text-white"
+            }`}
+          >
+            {notification}
+          </div>,
+          document.getElementById("portal-root")
+        )}
     </div>
   );
 }
