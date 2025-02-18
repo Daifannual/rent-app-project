@@ -35,7 +35,7 @@ export default function Home() {
           </Link>
         </Card>
         <Card className="text-center flex justify-center items-center">
-          <Link href="/admin/barang" className="w-full">
+          <Link href="/admin/customer" className="w-full">
             <CardDescription className="flex gap-3 text-xl font-medium text-zinc-700 py-2 items-center justify-center">
               <MonitorSmartphone size={20} />
               Customer
