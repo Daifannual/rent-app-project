@@ -1,45 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MonitorSmartphone, MoveUpRight, Plus } from "lucide-react";
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { MonitorSmartphone, MoveUpRight } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { fetchAlat } from "@/store/api";
+import { useGetAlatQuery } from "@/dataservices/api/api";
 
 export default function Home() {
-  const router = useRouter();
-  const [alatData, setAlatData] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, error } = useGetAlatQuery();
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      router.push("/");
-    } else {
-      // Fetch data alat dari API
-      const fetchData = async () => {
-        try {
-          const data = await fetchAlat(token);
-          setAlatData(data); // Simpan data alat ke state
-        } catch (err) {
-          setError("Failed to fetch data");
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchData();
-    }
-  }, [router]);
-
-  if (loading) {
+  if (isLoading) {
     return <div className="p-4">Loading...</div>;
   }
 
   if (error) {
-    return <div className="p-4">Error: {error}</div>;
+    return <div className="p-4">Error </div>;
   }
 
   return (
@@ -49,7 +30,7 @@ export default function Home() {
         <Card className="text-center flex justify-center items-center bg-blue-600">
           <Link href="/admin/penyewaan" className="w-full">
             <CardDescription className="text-xl font-semibold text-white py-2 flex items-center justify-center gap-2">
-              Penyewaan <Plus size={20} />
+              Penyewaan <MoveUpRight size={20} />
             </CardDescription>
           </Link>
         </Card>
@@ -74,18 +55,22 @@ export default function Home() {
       {/* Bagian Bawah: Daftar Produk */}
       <main className="mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-1 md:mx-1">
-          {alatData.map((alat) => (
-            <Card key={alat.alat_id}>
-              <CardHeader>
-                <CardTitle>{alat.alat_nama}</CardTitle>
-                <CardDescription>{alat.alat_kategori_id}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex justify-between">
-                <p className="text-sm text-zinc-500">{alat.alat_deskripsi}</p>
-                <p className="font-semibold text-zinc-500">Rp. {alat.alat_hargaperhari}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {data?.data.map((tool) => (
+          <Card key={tool.id}>
+            <CardHeader>
+              <CardTitle>{tool.alat_nama}</CardTitle>
+              <CardDescription>{tool.alat_deskripsi}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <p>Harga Per Hari: Rp. {tool.alat_hargaperhari.toLocaleString()}</p>
+                <p>Stok: {tool.alat_stok}</p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
         </div>
         <div className="w-full flex justify-center my-10">
           <Link href="/barang">

@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
-  const showNavbar = pathname !== "/login" && pathname !== "/register";
+  const showNavbar = pathname !== "/login" && pathname !== "/register" && pathname !== "/reset-password";
 
   return (
     <html lang="en" className={inter.className}>

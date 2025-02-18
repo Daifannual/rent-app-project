@@ -48,21 +48,48 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 mx-10 md:mx-32">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Iphone 13</CardTitle>
-                  <CardDescription>Handphone</CardDescription>
-                </CardHeader>
-                <CardContent className="flex justify-between">
-                  <p className="text-sm text-zinc-500">8/128, Black</p>
-                  <p className=" font-semibold text-zinc-500">Rp. 35.000</p>
-                </CardContent>
-              </Card>
+              <div className="flex flex-col bg-zinc-100/75 rounded-2xl">
+                <div className="px-6 py-8 lg:p-8 lg:pb-6">
+                  <div className="grid items-center justify-center w-full grid-cols-1 text-left">
+                    <div>
+                      <h2 className="text-lg font-medium tracking-tighter text-gray-700 lg:text-3xl">
+                        Asus TUF f15
+                      </h2>
+                      <p className="mt-2 text-sm text-gray-500">Laptop </p>
+                      <p className="mt-2 text-sm text-gray-600">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Praesentium dolore eveniet repellat!{" "}
+                      </p>
+                    </div>
+                    <div className="mt-2 flex justify-between items-center">
+                      <p>
+                        <span className="text-xl font-light tracking-tight text-black">
+                          95.000
+                        </span>
+                        <span className="text-base font-medium text-gray-500">
+                          {" "}
+                          /hari{" "}
+                        </span>
+                      </p>
+                      <p>
+                        <span className="flex text-sm text-zinc-500 tracking-tight">
+                          stok: <p>8</p>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
+
         </div>
         <div className="w-full flex justify-center my-10">
-        <Link href="/barang"><Button className="rounded-full bg-gradient-to-r from-purple-600 to-blue-700 text-white">Selengkapnya <MoveUpRight /></Button></Link>
+          <Link href="/barang">
+            <Button className="rounded-full text-white">
+              Selengkapnya <MoveUpRight />
+            </Button>
+          </Link>
         </div>
       </main>
     </div>

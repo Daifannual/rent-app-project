@@ -1,155 +1,139 @@
 "use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useForgotPasswordMutation, useResetPasswordMutation } from "@/dataservices/api/api";
 
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useForgotPasswordMutation, useResetPasswordMutation } from '@/store/api'; // Import hooks
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState(""); // State untuk menyimpan token
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [step, setStep] = useState(1); // 1: Forgot Password, 2: Reset Password
+  const [forgotPassword, { isLoading: isForgotLoading }] = useForgotPasswordMutation();
+  const [resetPassword, { isLoading: isResetLoading }] = useResetPasswordMutation();
+  const router = useRouter();
 
-export function ForgotAndResetPassword() {
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState(''); // Untuk menyimpan access token (tersembunyi)
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [isResetMode, setIsResetMode] = useState(false); // Untuk beralih antara mode forgot dan reset
-  const [forgotPassword, { isLoading: isForgotLoading, error: forgotError }] = useForgotPasswordMutation();
-  const [resetPassword, { isLoading: isResetLoading, error: resetError }] = useResetPasswordMutation();
-
-  // Handler untuk meminta token reset password
-  const handleForgotPassword = async (e: React.FormEvent) => {
+  // Handle submit forgot password
+  const handleForgotSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await forgotPassword({ email }).unwrap();
-      setToken(response.token); // Simpan token yang diterima
-      setIsResetMode(true); // Beralih ke mode reset password
-      alert('Access token telah diterima. Silakan masukkan password baru.');
-    } catch (err) {
-      console.error('Gagal mendapatkan access token:', err);
-      alert('Gagal mendapatkan access token. Silakan coba lagi.');
+      setToken(response.token); // Simpan token dari respons server
+      alert("Token telah dikirim ke email Anda.");
+      setStep(2); // Pindah ke step reset password
+    } catch (error) {
+      console.error("Forgot password failed:", error);
+      alert("Gagal meminta token. Silakan coba lagi.");
     }
   };
 
-  // Handler untuk mereset password
-  const handleResetPassword = async (e: React.FormEvent) => {
+  // Handle submit reset password
+  const handleResetSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== passwordConfirmation) {
-      alert('Password dan konfirmasi password tidak cocok.');
+      alert("Password dan konfirmasi password tidak cocok.");
       return;
     }
     try {
       const response = await resetPassword({
-        email, // Email harus tetap dikirim ke API
-        token, // Gunakan token yang tersimpan
+        email,
         password,
         password_confirmation: passwordConfirmation,
+        token,
       }).unwrap();
-      console.log('Password berhasil direset:', response);
-      alert('Password berhasil direset.');
-      setIsResetMode(false); // Kembali ke mode forgot password
-      setEmail('');
-      setPassword('');
-      setPasswordConfirmation('');
-      setToken('');
-    } catch (err) {
-      console.error('Gagal mereset password:', err);
-      alert('Gagal mereset password. Silakan coba lagi.');
+      alert(response.message); // Tampilkan pesan sukses dari server
+      router.push("/login"); // Redirect ke halaman login
+    } catch (error) {
+      console.error("Reset password failed:", error);
+      alert("Gagal mereset password. Silakan coba lagi.");
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-[400px] mx-2">
-        <CardHeader>
-          <CardTitle>{isResetMode ? 'Reset Password' : 'Forgot Password'}</CardTitle>
-          <CardDescription>
-            {isResetMode
-              ? 'Masukkan password baru dan konfirmasi password.'
-              : 'Masukkan email Anda untuk mendapatkan access token.'}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={isResetMode ? handleResetPassword : handleForgotPassword}>
-            <div className="grid w-full items-center gap-4">
-              {!isResetMode && (
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    placeholder="Masukkan Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-              )}
-              {isResetMode && (
-                <>
-                  {/* Token disembunyikan */}
-                  <input type="hidden" value={token} />
+      <form
+        onSubmit={step === 1 ? handleForgotSubmit : handleResetSubmit}
+        className="bg-white p-8 rounded shadow-md w-96"
+      >
+        <h2 className="text-2xl font-bold mb-4">
+          {step === 1 ? "Forgot Password" : "Reset Password"}
+        </h2>
 
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      placeholder="Masukkan Email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      disabled // Email tidak bisa diubah karena sudah digunakan untuk mendapatkan token
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="password">Password Baru</Label>
-                    <Input
-                      id="password"
-                      placeholder="Masukkan Password Baru"
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="passwordConfirmation">Konfirmasi Password</Label>
-                    <Input
-                      id="passwordConfirmation"
-                      placeholder="Konfirmasi Password"
-                      type="password"
-                      value={passwordConfirmation}
-                      onChange={(e) => setPasswordConfirmation(e.target.value)}
-                    />
-                  </div>
-                </>
-              )}
+        {/* Step 1: Forgot Password */}
+        {step === 1 && (
+          <div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                required
+              />
             </div>
-            {(forgotError || resetError) && (
-              <p className="text-red-500 mt-2">
-                {forgotError ? 'Gagal mendapatkan access token.' : 'Gagal mereset password.'}
-              </p>
-            )}
-            <CardFooter className="flex justify-between mt-4">
-              <Button type="submit" className="w-full md:w-fit" disabled={isForgotLoading || isResetLoading}>
-                {isForgotLoading || isResetLoading
-                  ? isResetMode
-                    ? 'Merubah Password...'
-                    : 'Mengirim...'
-                  : isResetMode
-                  ? 'Reset Password'
-                  : 'Kirim'}
-              </Button>
-            </CardFooter>
-          </form>
-        </CardContent>
-      </Card>
+            <button
+              type="submit"
+              disabled={isForgotLoading}
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            >
+              {isForgotLoading ? "Sending..." : "Send Reset Token"}
+            </button>
+          </div>
+        )}
+
+        {/* Step 2: Reset Password */}
+        {step === 2 && (
+          <div>
+            <div className="mb-4">
+              <input
+                type="hidden"
+                value={token} // Token otomatis terisi dari state
+                readOnly // Input hanya bisa dibaca (tidak bisa diedit)
+                className="w-full px-3 py-2 border rounded bg-gray-100"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Email</label>
+              <input
+                type="email"
+                disabled
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">New Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Confirm Password</label>
+              <input
+                type="password"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isResetLoading}
+              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            >
+              {isResetLoading ? "Resetting..." : "Reset Password"}
+            </button>
+          </div>
+        )}
+      </form>
     </div>
   );
 }
-
-export default ForgotAndResetPassword;
