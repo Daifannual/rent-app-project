@@ -43,5 +43,32 @@ export const api = createApi({
     }),
   }),
 });
+export const fetchAlat = async (accessToken: string) => {
+  try {
+    const response = await fetch(
+      "https://5558-103-161-195-82.ngrok-free.app/api/alat",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vNTU1OC0xMDMtMTYxLTE5NS04Mi5uZ3Jvay1mcmVlLmFwcC9hcGkvbG9naW4iLCJpYXQiOjE3Mzk3OTQ5MDgsImV4cCI6MTczOTk2NzcwOCwibmJmIjoxNzM5Nzk0OTA4LCJqdGkiOiJXSWx2N3ZlTXpzaXR0N01rIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.VwxWbzkrr0wAQkfnJQqJpAxuLgr5fdV552HXGqacqf0`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching data: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching alat:", error);
+    throw error;
+  }
+};
+
 
 export const { useLoginMutation, useRegisterMutation, useForgotPasswordMutation, useResetPasswordMutation } = api;
