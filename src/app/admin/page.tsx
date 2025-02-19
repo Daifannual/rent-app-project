@@ -55,22 +55,25 @@ export default function Home() {
       {/* Bagian Bawah: Daftar Produk */}
       <main className="mt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-1 md:mx-1">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {data?.data.map((tool) => (
-          <Card key={tool.id}>
-            <CardHeader>
-              <CardTitle>{tool.alat_nama}</CardTitle>
-              <CardDescription>{tool.alat_deskripsi}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p>Harga Per Hari: Rp. {tool.alat_hargaperhari.toLocaleString()}</p>
-                <p>Stok: {tool.alat_stok}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {data?.data.map((tool) => (
+              <Card key={tool.id}>
+                <CardHeader>
+                  <CardTitle>{tool.alat_nama}</CardTitle>
+                  <CardDescription>{tool.alat_deskripsi}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p>
+                      Harga Per Hari: Rp.{" "}
+                      {tool.alat_hargaperhari.toLocaleString()}
+                    </p>
+                    <p>Stok: {tool.alat_stok}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
         <div className="w-full flex justify-center my-10">
           <Link href="/barang">
