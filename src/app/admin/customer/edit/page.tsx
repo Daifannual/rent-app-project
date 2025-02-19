@@ -19,10 +19,10 @@ export function Tambah() {
         <Card className="w-full p-8 bg-white shadow-lg rounded-lg border border-gray-200">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-primary">
-              Tambah Data Customer
+            Edit Data Customer
             </CardTitle>
             <CardDescription className="text-gray-500">
-              Masukkan data customer berikut ini.
+           Ubah data customer berikut ini.
             </CardDescription>
           </CardHeader>
           <CardContent>

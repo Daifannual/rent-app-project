@@ -17,10 +17,10 @@ import Link from "next/link";
 export function Edit() {
   // State untuk menyimpan nilai input
   const [formData, setFormData] = useState({
-    namaAlat: "",
-    deskripsiAlat: "",
+    namaBarang: "",
+    deskripsiBarang: "",
     hargaPerHari: "",
-    stokAlat: "",
+    stokBarang: "",
   });
 
   // Handler untuk mengupdate state saat input berubah
@@ -40,34 +40,34 @@ export function Edit() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
-      {/* Full-screen container */}
-      <div className="w-full max-w-lg p-6">
-        <Card className="w-full p-6 bg-white shadow-lg rounded-lg">
+    <div className="flex justify-center items-center min-h-screen">
+         {/* Full-screen container */}
+         <div className="w-full p-3">
+           <Card className="w-full p-6 bg-white rounded-lg">
           <CardHeader>
-            <CardTitle>Edit Alat</CardTitle>
-            <CardDescription>Edit alat yang akan di sewa</CardDescription>
+            <CardTitle>Edit Barang</CardTitle>
+            <CardDescription>Edit Barang yang akan di sewa</CardDescription>
           </CardHeader>
           <CardContent>
             <form>
               <div className="grid w-full items-center gap-6">
-                {/* Nama Alat */}
+                {/* Nama Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="namaAlat">Nama Alat</Label>
+                  <Label htmlFor="namaBarang">Nama Barang</Label>
                   <Input
-                    id="namaAlat"
-                    placeholder="Alat yang disewa"
-                    value={formData.namaAlat}
+                    id="namaBarang"
+                    placeholder="Barang yang disewa"
+                    value={formData.namaBarang}
                     onChange={handleChange}
                   />
                 </div>
-                {/* Deskripsi Alat */}
+                {/* Deskripsi Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="deskripsiAlat">Deskripsi Alat</Label>
+                  <Label htmlFor="deskripsiBarang">Deskripsi Barang</Label>
                   <Input
-                    id="deskripsiAlat"
-                    placeholder="Alat ini digunakan untuk..."
-                    value={formData.deskripsiAlat}
+                    id="deskripsiBarang"
+                    placeholder="Barang ini digunakan untuk..."
+                    value={formData.deskripsiBarang}
                     onChange={handleChange}
                   />
                 </div>
@@ -82,14 +82,14 @@ export function Edit() {
                     onChange={handleChange}
                   />
                 </div>
-                {/* Stok Alat */}
+                {/* Stok Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="stokAlat">Stok Alat</Label>
+                  <Label htmlFor="stokBarang">Stok Barang</Label>
                   <Input
-                    id="stokAlat"
+                    id="stokBarang"
                     type="number"
                     placeholder="Masukkan jumlah stok"
-                    value={formData.stokAlat}
+                    value={formData.stokBarang}
                     onChange={handleChange}
                   />
                 </div>
@@ -97,9 +97,11 @@ export function Edit() {
             </form>
           </CardContent>
           <CardFooter className="flex justify-end space-x-4 mt-6">
-            <Button variant="outline" onClick={() => alert("Kembali ke halaman sebelumnya")}>
+          <Link href="/admin/barang">
+            <Button variant="outline">
               Kembali
             </Button>
+            </Link>
             <Button onClick={handleSave}>Simpan</Button>
           </CardFooter>
         </Card>
