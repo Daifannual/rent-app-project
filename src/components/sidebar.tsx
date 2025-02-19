@@ -33,7 +33,7 @@ export function AppSidebar() {
       </div>
 
       {/* Sidebar (Layar besar) */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r shadow-sm h-screen p-4">
+      <aside className="hidden lg:flex flex-col w-64 border-r shadow-sm h-screen p-4">
         <SidebarMenu />
       </aside>
     </>
@@ -42,8 +42,8 @@ export function AppSidebar() {
 
 function SidebarMenu({ setIsOpen }: { setIsOpen?: (open: boolean) => void }) {
   return (
-    <nav className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold mb-3">Admin Panel</h2>
+    <nav className="flex flex-col gap-4">
+      <h2 className="text-xl font-bold mb-2 my-3"> Admin Panel</h2>
       {items.map((item) => (
         <Link
           key={item.title}

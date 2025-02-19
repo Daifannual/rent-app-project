@@ -94,7 +94,7 @@ const Barang = () => {
     const matchesCategory =
       selectedCategory === "all" || card.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  }); 
+  });
 
   return (
     <div className="juctify-center pb-12">
@@ -143,23 +143,37 @@ const Barang = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 mx-10 md:mx-32">
         {filteredCards.map((card) => (
           <div key={card.id}>
-            <Card>
-              <CardHeader>
-                <CardTitle>{card.title}</CardTitle>
-                <CardDescription>
-                  {categoryNames[card.category]}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex justify-between">
-                <p className="text-sm text-zinc-500">{card.description}</p>
-                <p className=" font-semibold text-zinc-500">
-                  Rp. {card.price.toLocaleString("id-ID")}
-                </p>
-              </CardContent>
-              <CardFooter className="flex items-center justify-end gap-2">
-                <p className="text-sm text-zinc-500">Stok: {card.stock}</p>
-              </CardFooter>
-            </Card>
+            <div className="flex flex-col bg-zinc-100/75 rounded-2xl">
+              <div className="px-6 py-8 lg:p-8 lg:pb-6">
+                <div className="grid items-center justify-center w-full grid-cols-1 text-left">
+                  <div>
+                    <h2 className="text-lg font-medium tracking-tighter text-gray-700 lg:text-3xl">
+                      {card.title}
+                    </h2>
+                    <p className="mb-2 text-sm text-gray-400">{categoryNames[card.category]} </p>
+                    <p className="mt-2 text-sm text-gray-600">
+                      {card.description}
+                    </p>
+                  </div>
+                  <div className="mt-2 flex justify-between items-center">
+                    <span>
+                    <p>
+                      <span className="flex text-sm text-zinc-500 tracking-tight">
+                        stok: 
+                      </span>
+                    </p>
+                      <span className="text-xl font-light tracking-tight text-black">
+                      {card.price.toLocaleString()}
+                      </span>
+                      <span className="text-base font-medium text-gray-500">
+                        {" "}
+                        /hari{" "}
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
