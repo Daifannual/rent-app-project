@@ -31,16 +31,16 @@ export default function Home() {
         <div className="mt-8 mx-8 text-center">
           <h1 className="text-4xl font-medium">Semua yang Anda butuhkan</h1>
           <div className="mt-4 flex flex-col md:flex-row gap-4 text-zinc-700 font-medium justify-center md:justify-center md:text-left">
-            <p className="md:w-2/6">
+            <div className="md:w-2/6">
               Kami menyediakan berbagai alat elektronik seperti kamera
               profesional, laptop gaming, dan handphone dengan kualitas terbaik
               untuk memenuhi kebutuhan Anda.
-            </p>
+            </div>
 
-            <p className="md:w-2/6">
+            <div className="md:w-2/6">
               Cukup pilih alat yang Anda inginkan, dan kami akan melayani
               penyewaan Anda. Semua proses dilakukan secara cepat dan mudah.
-            </p>
+            </div>
           </div>
         </div>
       </header>
@@ -55,14 +55,14 @@ export default function Home() {
                       <h2 className="text-lg font-medium tracking-tighter text-gray-700 lg:text-3xl">
                         Asus TUF f15
                       </h2>
-                      <p className="mt-2 text-sm text-gray-500">Laptop </p>
-                      <p className="mt-2 text-sm text-gray-600">
+                      <div className="mt-2 text-sm text-gray-500">Laptop </div>
+                      <div className="mt-2 text-sm text-gray-600">
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Praesentium dolore eveniet repellat!{" "}
-                      </p>
+                      </div>
                     </div>
                     <div className="mt-2 flex justify-between items-center">
-                      <p>
+                      <div>
                         <span className="text-xl font-light tracking-tight text-black">
                           95.000
                         </span>
@@ -70,12 +70,12 @@ export default function Home() {
                           {" "}
                           /hari{" "}
                         </span>
-                      </p>
-                      <p>
+                      </div>
+                      <div>
                         <span className="flex text-sm text-zinc-500 tracking-tight">
-                          stok: <p>8</p>
+                          stok: <div>8</div>
                         </span>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
