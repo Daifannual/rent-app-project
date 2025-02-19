@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function TambahKamera() {
+export function TambahKategori() {
   const handleSimpan = () => {
     console.log("Simpan clicked");
   };
@@ -23,17 +23,17 @@ export function TambahKamera() {
       <div className="w-full p-3 md:w-2/3 lg:w-1/2"> {/* Added responsive width */}
         <Card className="bg-white rounded-lg shadow-md"> {/* Added shadow */}
           <CardHeader className="p-4"> {/* Added padding to header */}
-            <CardTitle className="text-xl font-semibold text-gray-800">Tambah Kategori Kamera</CardTitle>
-            <CardDescription className="text-gray-600">Tambahkan kategori Kamera</CardDescription>
+            <CardTitle className="text-xl font-semibold text-gray-800">Tambah Kategori</CardTitle>
+            <CardDescription className="text-gray-600">Tambahkan kategori baru</CardDescription>
           </CardHeader>
           <CardContent className="p-6"> {/* Added padding to content */}
             <form>
               <div className="grid w-full items-center gap-6">
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="nama-laptop" className="text-gray-700">Nama Kategori Kamera</Label>
+                  <Label htmlFor="nama-laptop" className="text-gray-700">Nama Kategori </Label>
                   <Input
-                    id="nama-kamera"
-                    placeholder="Misalnya: DSLR, Mirrorless, dll."
+                    id="nama-kategori"
+                    placeholder="Misalnya: Komputer, Radio, dll."
                     className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" // Added styling to input
                   />
                 </div>
@@ -51,4 +51,4 @@ export function TambahKamera() {
   );
 }
 
-export default TambahKamera;
+export default TambahKategori;
