@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Home, Inbox, Calendar, Search, Settings, Menu, MonitorSmartphone, PersonStanding, LogOut } from "lucide-react";
+import { Home, Inbox, Calendar, Search, Settings, Menu, MonitorSmartphone, PersonStanding, LogOut, AlignLeft } from "lucide-react";
 import Link from "next/link";
 
 const items = [
   { title: "Home", url: "/admin", icon: Home },
+  { title: "Kategori", url: "/admin/kategori", icon: AlignLeft },
   { title: "Barang", url: "/admin/barang", icon: MonitorSmartphone },
-  { title: "Customer", url: "/admin/customer", icon: PersonStanding },
+  { title: "Customer", url: "/customer", icon: PersonStanding },
   { title: "Logout", url: "/admin/logout", icon: LogOut },
 ];
 
