@@ -40,7 +40,7 @@ export default function RootLayout({
       <body className={`bg-background text-foreground antialiased`}>
         {/* Bungkus seluruh aplikasi dengan ErrorBoundary */}
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Providers>
+          <Providers> 
             {showNavbar && !isAdmin && <Navbar />}
             {children}
             <div id="portal-root"></div>
