@@ -1,22 +1,7 @@
-// import { LoginCredentials, LoginResponse } from "@/app/login/page.type";
-// import axios from "axios";
-
-// const baseUrl = 'https://a217-103-165-209-242.ngrok-free.app/api/auth/login';
-
-// const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
-//     try {
-//         const response = await axios.post<LoginResponse>(baseUrl, credentials);
-//         return response.data;
-//     } catch (error) {
-//         throw new Error('Login failed');
-//     }
-// }
-
-// export default login
-
-import baseQuery from "@/init/baseQuery";
+import { baseQuery } from "@/init/baseQuery";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ForgotPasswordResponse, GetToolsResponse, LoginResponse, RegisterResponse } from "./type";
+import { Tool } from "@/types/alat";
 
 const api = createApi({
   reducerPath: "api",
@@ -31,7 +16,6 @@ const api = createApi({
         body: credentials,
       }),
     }),
-
     register: builder.mutation<
       RegisterResponse,
       { name: string; email: string; password: string }
@@ -42,16 +26,13 @@ const api = createApi({
         body: userData,
       }),
     }),
-
-    forgotPassword: builder.mutation<ForgotPasswordResponse
-     , { email: string }>({
+    forgotPassword: builder.mutation<ForgotPasswordResponse, { email: string }>({
       query: (emailData) => ({
         url: "/forgot_password", // Endpoint untuk forgot password
         method: "POST",
         body: emailData,
       }),
     }),
-
     resetPassword: builder.mutation<
       { message: string },
       {
@@ -64,20 +45,79 @@ const api = createApi({
       query: (resetData) => ({
         url: "/reset_password", // Endpoint untuk reset password
         method: "POST",
-        body: resetData,
+        body: resetData,  
+      }),
+    }),
+    getAlat: builder.query<Tool[], void>({
+      query: () => ({
+        url: "/alat",
+        method: "GET",
+      }),
+      transformResponse: (response: GetToolsResponse) => response.data, // Ambil properti `data`
+      providesTags: ["Alat"],
+    }),
+    // Endpoint untuk logout
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: "/logout", // Endpoint untuk logout
+        method: "POST",
       }),
     }),
 
-    getAlat: builder.query<GetToolsResponse, void>({
-      query: () => ({
-        url: "/alat", // Endpoint untuk mengambil data alat
-        method: "GET",
+    // Tambahkan fungsi CRUD di bawah ini
+
+    // Create Alat
+    createAlat: builder.mutation<void, Partial<Tool>>({
+      query: (toolData) => ({
+        url: "/alat/create",
+        method: "POST",
+        body: toolData,
       }),
-      providesTags: ["Alat"], // Untuk caching dan invalidasi
+      invalidatesTags: ["Alat"], // Invalidasi cache untuk tag "Alat"
+    }),
+
+    // Update Alat (PUT)
+    updateAlat: builder.mutation<void, { id: number; data: Partial<Tool> }>({
+      query: ({ id, data }) => ({
+        url: `/alat/put/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Alat"], // Invalidasi cache untuk tag "Alat"
+    }),
+
+    // Update Alat (PATCH)
+    updatePatchAlat: builder.mutation<void, { id: number; data: Partial<Tool> }>({
+      query: ({ id, data }) => ({
+        url: `/alat/patch/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Alat"], // Invalidasi cache untuk tag "Alat"
+    }),
+
+    // Delete Alat
+    deleteAlat: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/alat/delete/${id}`, // Perhatikan format URL sesuai backend
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Alat"], // Invalidasi cache untuk tag "Alat"
     }),
   }),
 });
 
-export const { useLoginMutation, useGetAlatQuery, useRegisterMutation,useForgotPasswordMutation, useResetPasswordMutation } = api;
+export const {
+  useLoginMutation,
+  useGetAlatQuery,
+  useRegisterMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+  useLogoutMutation,
+  useCreateAlatMutation, // Export hook untuk create alat
+  useUpdateAlatMutation, // Export hook untuk update alat (PUT)
+  useUpdatePatchAlatMutation, // Export hook untuk update alat (PATCH)
+  useDeleteAlatMutation, // Export hook untuk delete alat
+} = api;
 
 export default api;

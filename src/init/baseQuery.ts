@@ -1,11 +1,20 @@
-import { fetchBaseQuery } from "@reduxjs/toolkit/query";
+// init/baseQuery.ts
+import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import Cookies from 'js-cookie';
 
-const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://6e26-103-165-209-242.ngrok-free.app/api',
-    prepareHeaders: (headers) => {
-        const accessToken = '';
-        headers.set('Authorization', `Bearer ${accessToken}`);
+export const baseQuery = fetchBaseQuery({
+  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+  prepareHeaders: (headers, { getState }) => {
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json');
+    headers.set("ngrok-skip-browser-warning", "true");  
+
+
+    const accessToken = Cookies.get('token');
+    if (accessToken) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
     }
-});
 
-export default baseQuery
+    return headers;
+  },
+});

@@ -37,7 +37,7 @@ export function NavbarView() {
               ))}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Pinjem Dong</a>
+          <a className="btn btn-ghost text-xl">Pinjem aja</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
