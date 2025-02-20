@@ -116,7 +116,7 @@ export function DataTableDemo() {
       <div className="flex items-center justify-between py-4">
         <h1 className="text-2xl font-bold text-primary">Daftar Customer</h1>
         <Input
-          placeholder="Cari nama alat..."
+          placeholder="Cari nama ..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -216,7 +216,7 @@ export const columns: ColumnDef<Tool>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         className="text-primary hover:text-primary-dark font-bold"
       >
-        Nama Alat
+        Nama Customer
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
