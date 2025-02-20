@@ -277,7 +277,7 @@ export const columns: ColumnDef<Tool>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuLabel>Aksi</DropdownMenuLabel>
-            <Link href={"/admin/barang/edit"}>
+            <Link href={"/admin/customer/edit"}>
             <DropdownMenuItem
               onClick={handleEdit}
               className="text-blue-600 hover:bg-blue-100"

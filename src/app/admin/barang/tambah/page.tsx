@@ -19,22 +19,22 @@ export function Tambah() {
       <div className="w-full p-3">
         <Card className="w-full p-6 bg-white rounded-lg">
           <CardHeader>
-            <CardTitle>Tambah Alat</CardTitle>
-            <CardDescription>Tambahkan alat yang akan di sewa</CardDescription>
+            <CardTitle>Tambah Barang</CardTitle>
+            <CardDescription>Tambahkan Barang yang akan di sewa</CardDescription>
           </CardHeader>
           <CardContent>
             <form>
               <div className="grid w-full items-center gap-6">
-                {/* Nama Alat */}
+                {/* Nama Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="nama-alat">Nama Alat</Label>
-                  <Input id="nama-alat" placeholder="Laptop" />
+                  <Label htmlFor="nama-Barang">Nama Barang</Label>
+                  <Input id="nama-Barang" placeholder="Laptop" />
                 </div>
 
-                {/* Deskripsi Alat */}
+                {/* Deskripsi Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="deskripsi-alat">Deskripsi Alat</Label>
-                  <Input id="deskripsi-alat" placeholder="Alat ini digunakan untuk..." />
+                  <Label htmlFor="deskripsi-Barang">Deskripsi Barang</Label>
+                  <Input id="deskripsi-Barang" placeholder="Barang ini digunakan untuk..." />
                 </div>
 
                 {/* Harga Per Hari */}
@@ -47,11 +47,11 @@ export function Tambah() {
                   />
                 </div>
 
-                {/* Stok Alat */}
+                {/* Stok Barang */}
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="stok-alat">Stok Alat</Label>
+                  <Label htmlFor="stok-Barang">Stok Barang</Label>
                   <Input
-                    id="stok-alat"
+                    id="stok-Barang"
                     type="number"
                     placeholder="Masukkan jumlah stok"
                   />
@@ -61,7 +61,9 @@ export function Tambah() {
           </CardContent>
           <CardFooter className="flex justify-end space-x-4 mt-6">
             <Button variant="outline">Simpan</Button>
+            <Link href="/admin/barang">
             <Button>Kembali</Button>
+            </Link>
           </CardFooter>
         </Card>
       </div>

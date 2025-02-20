@@ -44,7 +44,7 @@ export default function Home() {
         <div className="mt-8 mx-8 text-center">
           <h1 className="text-4xl font-medium">Semua yang Anda butuhkan</h1>
           <div className="mt-4 flex flex-col md:flex-row gap-4 text-zinc-700 font-medium justify-center md:justify-center md:text-left">
-            <p className="md:w-2/6">
+            <div className="md:w-2/6">
               Kami menyediakan berbagai alat elektronik seperti kamera
               profesional, laptop gaming, dan handphone dengan kualitas terbaik
               untuk memenuhi kebutuhan Anda.
@@ -52,7 +52,7 @@ export default function Home() {
             <p className="md:w-2/6">
               Cukup pilih alat yang Anda inginkan, dan kami akan melayani
               penyewaan Anda. Semua proses dilakukan secara cepat dan mudah.
-            </p>
+            </div>
           </div>
         </div>
       </header>
