@@ -9,7 +9,7 @@ const items = [
   { title: "Home", url: "/admin", icon: Home },
   { title: "Kategori", url: "/admin/kategori", icon: AlignLeft },
   { title: "Barang", url: "/admin/barang", icon: MonitorSmartphone },
-  { title: "Customer", url: "/customer", icon: PersonStanding },
+  { title: "Customer", url: "/admin/customer", icon: PersonStanding },
   { title: "Logout", url: "/admin/logout", icon: LogOut },
 ];
 
